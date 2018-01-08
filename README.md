@@ -1,2 +1,2 @@
-# CosmicWatch-Desktop-Muon-Detector-with-microSD-
-The CosmicWatch Desktop Muon Detector supplementary material
+# CosmicWatch-Desktop-Muon-Detector
+This repository if for the supplementary material used to build the CosmicWatch Desktop Muon Detectors
