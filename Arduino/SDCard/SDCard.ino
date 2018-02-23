@@ -1,10 +1,14 @@
- /*
-Desktop Muon Counter Arduino Code
-Questions?
-Spencer N. Axani 
-saxani@mit.edu
+/*
+  CosmicWatch Desktop Muon Detector Arduino Code
 
-Requirements: Sketch->Include->Manage Libraries:
+  This code is used to record data to the built in microSD card reader/writer.
+  
+  Questions?
+  Spencer N. Axani
+  saxani@mit.edu
+
+  Requirements: Sketch->Include->Manage Libraries:
+  SPI, EEPROM, SD, and Wire are probably already installed.
   1. Adafruit SSD1306     -- by Adafruit Version 1.0.1
   2. Adafruit GFX Library -- by Adafruit Version 1.0.2
   3. TimerOne             -- by Jesse Tane et al. Version 1.1.0
@@ -21,8 +25,9 @@ SdVolume volume;
 
 File myFile;
 
-const int SIGNAL_THRESHOLD    = 20;        // Min threshold to trigger on
+const int SIGNAL_THRESHOLD    = 50;        // Min threshold to trigger on
 const int RESET_THRESHOLD     = 15; 
+
 const int LED_BRIGHTNESS      = 255;         // Brightness of the LED [0,255]
 
 //Calibration fit data for 10k,10k,249,10pf; 20nF,100k,100k, 0,0,57.6k,  1 point
@@ -194,7 +199,7 @@ void write_to_SD(){
       digitalWrite(3, LOW);
       while(analogRead(A0) > RESET_THRESHOLD){continue;}
       
-      total_deadtime += (micros() - measurement_t1 + 1062) / 1000.;}
+      total_deadtime += (micros() - measurement_t1) / 1000.;}
     }
 }
 

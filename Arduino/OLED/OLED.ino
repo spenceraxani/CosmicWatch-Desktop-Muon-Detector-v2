@@ -1,11 +1,14 @@
 /*
-  Desktop Muon Detector Arduino Code
+  CosmicWatch Desktop Muon Detector Arduino Code
+
+  This code does not use the microSD card reader/writer, but does used the OLED screen.
+  
   Questions?
   Spencer N. Axani
   saxani@mit.edu
 
   Requirements: Sketch->Include->Manage Libraries:
-  SPI and Wire are probably already installed.
+  SPI, EEPROM, SD, and Wire are probably already installed.
   1. Adafruit SSD1306     -- by Adafruit Version 1.0.1
   2. Adafruit GFX Library -- by Adafruit Version 1.0.2
   3. TimerOne             -- by Jesse Tane et al. Version 1.1.0
