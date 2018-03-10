@@ -25,7 +25,7 @@ SdVolume volume;
 
 File myFile;
 
-const int SIGNAL_THRESHOLD    = 50;        // Min threshold to trigger on
+const int SIGNAL_THRESHOLD    = 30;        // Min threshold to trigger on
 const int RESET_THRESHOLD     = 15; 
 
 const int LED_BRIGHTNESS      = 255;         // Brightness of the LED [0,255]
