@@ -11,7 +11,7 @@
   SPI, EEPROM, SD, and Wire are probably already installed.
   1. Adafruit SSD1306     -- by Adafruit Version 1.0.1
   2. Adafruit GFX Library -- by Adafruit Version 1.0.2
-  3. TimerOne             -- b y Jesse Tane et al. Version 1.1.0
+  3. TimerOne             -- by Jesse Tane et al. Version 1.1.0
 */
 
 #include <Adafruit_SSD1306.h>
@@ -26,7 +26,7 @@ const byte OLED = 1;                      // Turn on/off the OLED [1,0]
 const int SIGNAL_THRESHOLD      = 50;    // Min threshold to trigger on. See calibration.pdf for conversion to mV.
 const int RESET_THRESHOLD       = 15;    
 
-const int LED_BRIGHTNESS        = 10;    // Brightness of the LED [0,255]
+const int LED_BRIGHTNESS        = 250;    // Brightness of the LED [0,255]
 
 const long double cal[] = {-9.085681659276021e-27, 4.6790804314609205e-23, -1.0317125207013292e-19,
   1.2741066484319192e-16, -9.684460759517656e-14, 4.6937937442284284e-11, -1.4553498837275352e-08,
@@ -96,14 +96,16 @@ void setup() {
   digitalWrite(3,LOW);
   if (MASTER == 1) {digitalWrite(6, LOW);}
 
-  Serial.println(F("#####################################################################################"));
+  Serial.println(F("##########################################################################################"));
   Serial.println(F("### CosmicWatch: The Desktop Muon Detector"));
   Serial.println(F("### Questions? saxani@mit.edu"));
-  Serial.println(F("### Comp_date Comp_time Event Ardn_time[ms] ADC[0-1023] SiPM[mV] Deadtime[ms] Temp[C]"));
-  Serial.println(F("#####################################################################################"));
+  Serial.println(F("### Comp_date Comp_time Event Ardn_time[ms] ADC[0-1023] SiPM[mV] Deadtime[ms] Temp[C] Name"));
+  Serial.println(F("##########################################################################################"));
 
   get_detector_name(detector_name);
   Serial.println(detector_name);
+  get_time();
+  delay(900);
   start_time = millis();
   
   Timer1.initialize(TIMER_INTERVAL);             // Initialise timer 1
@@ -205,8 +207,11 @@ void get_time()
   display.println((String) ((interrupt_timer - start_time) / 1000 / 3600) + ":" + min_char + ":" + sec_char);
 
   if (count == 0) {
-      if (MASTER == 1) {display.println(F("::---  MASTER   ---::"));}
-      if (SLAVE  == 1) {display.println(F("::---   SLAVE   ---::"));}}
+    display.println("Hi, I'm "+(String)detector_name);
+    }
+      //if (MASTER == 1) {display.println(F("::---  MASTER   ---::"));}
+      //if (SLAVE  == 1) {display.println(F("::---   SLAVE   ---::"));}}
+      
   else{
       if (last_sipm_voltage > 180){
           display.print(F("===---- WOW! ----==="));}
