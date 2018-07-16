@@ -25,7 +25,7 @@ SdVolume volume;
 
 File myFile;
 
-const int SIGNAL_THRESHOLD    = 30;        // Min threshold to trigger on
+const int SIGNAL_THRESHOLD    = 50;        // Min threshold to trigger on
 const int RESET_THRESHOLD     = 15; 
 
 const int LED_BRIGHTNESS      = 255;         // Brightness of the LED [0,255]
@@ -112,21 +112,18 @@ void setup() {
 
 void loop() {
   if(Mode == 1){
-   
-  
-  Serial.println(F("#####################################################################################"));
+  Serial.println(F("##########################################################################################"));
   Serial.println(F("### CosmicWatch: The Desktop Muon Detector"));
   Serial.println(F("### Questions? saxani@mit.edu"));
-  Serial.println(F("### Comp_date Comp_time Event Ardn_time[ms] ADC[0-1023] SiPM[mV] Deadtime[ms] Temp[C]"));
-  Serial.println(F("#####################################################################################"));
-  
+  Serial.println(F("### Comp_date Comp_time Event Ardn_time[ms] ADC[0-1023] SiPM[mV] Deadtime[ms] Temp[C] Name"));
+  Serial.println(F("##########################################################################################"));
   Serial.println("Device ID: " + (String)detector_name);
-  
-  myFile.println(F("#####################################################################################"));
+
+  myFile.println(F("##########################################################################################"));
   myFile.println(F("### CosmicWatch: The Desktop Muon Detector"));
   myFile.println(F("### Questions? saxani@mit.edu"));
-  myFile.println(F("### Comp_date Comp_time Event Ardn_time[ms] ADC[0-1023] SiPM[mV] Deadtime[ms] Temp[C]"));
-  myFile.println(F("#####################################################################################"));
+  myFile.println(F("### Comp_date Comp_time Event Ardn_time[ms] ADC[0-1023] SiPM[mV] Deadtime[ms] Temp[C] Name"));
+  myFile.println(F("##########################################################################################"));
   myFile.println("Device ID: " + (String)detector_name);
    
   write_to_SD();
@@ -165,7 +162,7 @@ void write_to_SD(){
           keep_pulse = 1;}
       
       analogRead(A3);
-      time_stamp = millis() - start_time;
+      
       if (SLAVE == 1){
           if (digitalRead(6) == HIGH){
               keep_pulse = 1;
@@ -176,6 +173,7 @@ void write_to_SD(){
             digitalWrite(6, LOW);}
 
       measurement_deadtime = total_deadtime;
+      time_stamp = millis() - start_time;
       measurement_t1 = micros();  
       temperatureC = (((analogRead(A3)+analogRead(A3)+analogRead(A3))/3. * (3300./1024)) - 500)/10. ;
 

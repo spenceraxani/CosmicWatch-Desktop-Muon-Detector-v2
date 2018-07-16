@@ -117,28 +117,43 @@ void loop()
 {
   while (1){
     if (analogRead(A0) > SIGNAL_THRESHOLD){ 
-      
+
+      // Make a measurement of the pulse amplitude
       int adc = analogRead(A0);
+      
+      // If Master, send a signal to the Slave
       if (MASTER == 1) {
           digitalWrite(6, HIGH);
           count++;
           keep_pulse = 1;}
-      
+
+      // Wait for ~8us
       analogRead(A3);
-      time_stamp = millis() - start_time;
+      
+      // If Slave, check for signal from Master
+      
       if (SLAVE == 1){
           if (digitalRead(6) == HIGH){
               keep_pulse = 1;
               count++;}}  
-              
+
+      // Wait for ~8us
       analogRead(A3);
+
+      // If Master, stop signalling the Slave
       if (MASTER == 1) {
           digitalWrite(6, LOW);}
-          
-      temperatureC = (((analogRead(A3)+analogRead(A3)+analogRead(A3))/3. * (3300./1024)) - 500)/10. ;
 
-      measurement_deadtime = total_deadtime;
+      // Measure the temperature, voltage reference is currently set to 3.3V
+      temperatureC = (((analogRead(A3)+analogRead(A3)+analogRead(A3))/3. * (3300./1024)) - 500.)/10. ;
+
       
+      // Measure deadtime
+      measurement_deadtime = total_deadtime;
+      time_stamp = millis() - start_time;
+      
+      
+      // If you are within 15 miliseconds away from updating the OLED screen, we'll let if finish 
       if((interrupt_timer + 1000 - millis()) < 15){ 
           waiting_t1 = millis();
           waiting_for_interupt = 1;
