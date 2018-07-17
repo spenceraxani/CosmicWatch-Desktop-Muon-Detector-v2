@@ -219,25 +219,34 @@ if mode == 1:
 		time.sleep(1)
 		#globals()['Det%s' % str(i)].write('write')  
 
-	   	counter = 0
+		counter = 0
 
-	   	header1 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
-	   	if 'CosmicWatchDetector' in header1:
-	   		header1a = globals()['Det%s' % str(i)].readline()
-	   		globals()['Det%s' % str(i)].write('write') 
-	   		header1b = globals()['Det%s' % str(i)].readline()
-	   		header1 = globals()['Det%s' % str(i)].readline()
-	   		#header1 = globals()['Det%s' % str(i)].readline()
-	   	header2 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
-	   	header3 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
-	   	header4 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
-	   	header5 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
+		header1 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
+		if 'SD initialization failed' in header1:
+			print('...SDCard.ino detected.')
+			print('...SDcard initialization failed.')
+			# This happens if the SDCard.ino is uploaded but it doesn't see an sdcard.
+			header1a = globals()['Det%s' % str(i)].readline()
+			header1 = globals()['Det%s' % str(i)].readline()
+		if 'CosmicWatchDetector' in header1:
+			print('...SDCard.ino code detected.')
+			print('...SDcard intialized correctly.')
+			# This happens if the SDCar.ino is uploaded and it sees an sdcard.
+			header1a = globals()['Det%s' % str(i)].readline()
+			globals()['Det%s' % str(i)].write('write') 
+			header1b = globals()['Det%s' % str(i)].readline()
+			header1 = globals()['Det%s' % str(i)].readline()
+			#header1 = globals()['Det%s' % str(i)].readline()
+		header2 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
+		header3 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
+		header4 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
+		header5 = globals()['Det%s' % str(i)].readline()     # Wait and read data 
 
-	   	det_name = globals()['Det%s' % str(i)].readline().replace('\r\n','')
-	   	#print(det_name)
-	   	if 'Device ID: ' in det_name:
-	   		det_name = det_name.split('Device ID: ')[-1]
-	   	detector_name_list.append(det_name)    # Wait and read data 
+		det_name = globals()['Det%s' % str(i)].readline().replace('\r\n','')
+		#print(det_name)
+		if 'Device ID: ' in det_name:
+			det_name = det_name.split('Device ID: ')[-1]
+		detector_name_list.append(det_name)    # Wait and read data 
 
 
 	file = open(fname, "w",0)
@@ -397,7 +406,11 @@ if mode == 4:
     print 'You can now connect to your device using http://cosmicwatch.lns.mit.edu/'
     mainLoop = tornado.ioloop.IOLoop.instance()
     #in the main loop fire queue check each 100ms
-    scheduler = tornado.ioloop.PeriodicCallback(checkQueue, 100, io_loop = mainLoop)
+    try:
+    	scheduler = tornado.ioloop.PeriodicCallback(checkQueue, 100, io_loop = mainLoop)
+    except:
+    	# io_loop arguement was removed in version 5.x of Tornado.
+    	scheduler = tornado.ioloop.PeriodicCallback(checkQueue, 100)
     scheduler.start()
     #start the loop
     mainLoop.start()
