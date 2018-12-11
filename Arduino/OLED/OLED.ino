@@ -26,7 +26,7 @@ const byte OLED = 1;                      // Turn on/off the OLED [1,0]
 const int SIGNAL_THRESHOLD      = 50;    // Min threshold to trigger on. See calibration.pdf for conversion to mV.
 const int RESET_THRESHOLD       = 15;    
 
-const int LED_BRIGHTNESS        = 250;    // Brightness of the LED [0,255]
+const int LED_BRIGHTNESS        = 255;    // Brightness of the LED [0,255]
 
 const long double cal[] = {-9.085681659276021e-27, 4.6790804314609205e-23, -1.0317125207013292e-19,
   1.2741066484319192e-16, -9.684460759517656e-14, 4.6937937442284284e-11, -1.4553498837275352e-08,
