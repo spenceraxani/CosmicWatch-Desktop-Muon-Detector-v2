@@ -1,4 +1,4 @@
-1##########################################################################################
+##########################################################################################
 ### CosmicWatch: The Desktop Muon Detector
 ### Questions? saxani@mit.edu
 ### Comp_date Comp_time Event Ardn_time[ms] ADC[0-1023] SiPM[mV] Deadtime[ms] Temp[C] Name

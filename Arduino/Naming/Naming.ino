@@ -4,7 +4,7 @@ const int EEPROM_MAX_ADDR = 511;
 
 // Set the name of your detector below and then upload the code to your detector. 
 // This will write the name in the EEPROM of the Arduino (permanent until overwritten).
-String det_name = "Adler";
+String det_name = "Phil";
 
 boolean eeprom_is_addr_ok(int addr) {
 return ((addr >= EEPROM_MIN_ADDR) && (addr <= EEPROM_MAX_ADDR));
