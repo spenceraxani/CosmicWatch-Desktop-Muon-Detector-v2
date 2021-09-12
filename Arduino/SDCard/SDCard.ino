@@ -26,7 +26,7 @@ SdVolume volume;
 File myFile;
 
 const int SIGNAL_THRESHOLD    = 50;        // Min threshold to trigger on
-const int RESET_THRESHOLD     = 15; 
+const int RESET_THRESHOLD     = 25; 
 
 const int LED_BRIGHTNESS      = 255;         // Brightness of the LED [0,255]
 
@@ -329,4 +329,3 @@ boolean get_detector_name(char* det_name)
     if ((ch != 0x00) && (bytesRead >= 1)) {det_name[bytesRead - 1] = 0;}
     return true;
 }
-
