@@ -38,7 +38,7 @@ def print_help1():
     print('1. Is your Arduino connected to the serial USB port?\n')
     print('2. Check that you have the correct drivers installed:\n')
     print('\tMacOS: CH340g driver (try: https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-driver)')
-    print('\tWindows: no dirver needed')
+    print('\tWindows: no driver needed')
     print('\tLinux: no driver needed')
 
 
