@@ -1,3 +1,9 @@
+# Who ordered that Muon
+This is the central repository for the 'Who ordered that Muon' project.
+
+It is forked from the Cosmic Watch repository for now: see the old readme below.
+
+
 # CosmicWatch-Desktop-Muon-Detector
 This repository if for the supplementary material used to build the CosmicWatch Desktop Muon Detectors V2
 
