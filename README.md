@@ -6,6 +6,7 @@ It is forked from the Cosmic Watch repository for now: see the old readme below.
 Participants:
 
 Tobias den Hollander
+
 [other names]
 
 
